@@ -1,0 +1,24 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server
+    tty: true
+    stdin_open: true
+    ports:
+      - "25565:25565"
+      - "8123:8123"
+    environment:
+      EULA: true
+      MOD_PLATFORM: MODRINTH
+      MODRINTH_MODPACK: /modpacks/DeerCraft 1.0.0.mrpack
+      MODRINTH_EXCLUDE_FILES: |
+        distanthorizons
+        lambdynamiclights
+      ENABLE_AUTOPAUSE: true
+      OVERRIDE_SERVER_PROPERTIES: true
+      MAX_TICK_TIME: "-1"
+      SERVER_NAME: "DeerCraft"
+      ICON: "https://raw.githubusercontent.com/CyberDeer/DeerCraft/master/icon.png"
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+      - ./modpacks:/modpacks:ro
